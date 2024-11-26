@@ -41,7 +41,7 @@ models:
 #    example:
 #      +materialized: table
     staging:
-      +materialized: view
+      +materialized: table
     intermediate:
       +materialized: ephemeral
     marts:

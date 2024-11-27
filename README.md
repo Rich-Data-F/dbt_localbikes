@@ -90,8 +90,7 @@ zip_code        95060
 
 
 <B 1. Définir les axes d’analyse :
-○ Identifier des axes d'analyse permettant d'aider l'équipe des opérations. B>
-
+○ Identifier des axes d'analyse permettant d'aider l'équipe des opérations.
 ○ Le but final est de leur permettre d’optimiser au mieux les ventes et de maximiser le revenu de l'entreprise grâce aux insights obtenus. B>
 > identifier les produits dont les ventes sont moins fréquentes (product_id et quantity_id faible  sur order_item, order_id sur) et qui bénéficierait d'une mise en promotion,
 > identifier l'effet de discoount sur amélioration des ventes

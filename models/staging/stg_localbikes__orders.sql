@@ -1,0 +1,25 @@
+/* {{ config(materialized="view") }}*/
+with source_data_orders as (select * from {{ source("localbikes", "orders") }})
+
+select
+    order_id,
+    customer_id,
+    order_status,
+    order_date,
+    required_date,
+    ifnull(shipped_date, 'pending') as shipped_date_status,  /* required correction */
+    store_id,
+    staff_id,
+    count(*) as line_count
+from source_data_orders
+group by
+    order_id,
+    customer_id,
+    order_status,
+    order_status,
+    order_date,
+    required_date,
+    shipped_date,
+    store_id,
+    staff_id
+order by order_id, line_count desc

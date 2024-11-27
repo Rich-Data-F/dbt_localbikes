@@ -1,0 +1,38 @@
+with order_items_grouped_by_orders as (
+select order_id,
+    sum(order_paid_price) as total_order_amount,
+    sum(quantity) as total_products,
+    count(distinct product_id) as total_distinct_product
+from {{ ref('stg_localbikes__order_items') }}
+group by order_id
+
+),
+/*feedback_grouped_by_order as (
+
+select order_id,
+    SUM(feedback_score) as sum_feedback_score,
+    COUNT(*) as total_feedbacks
+from {{ ref('stg_localbikes__orders') }}
+group by order_id
+)*/
+orders_grouped_by_months as (
+select concat(Month(date (order_date)),'_',year(date(order_date)) as order_month_year,
+    count(distinct order_id) as orders_per_month
+from {{ ref('stg_localbikes__orders') }}
+group by order_month_year
+)
+
+select o.order_id,
+    o.customer_id,
+    o.order_status,
+    o.order_required,
+    o.order_shipped,
+    c.city,
+    coalesce(oi.total_order_amount,0) as total_order_amount,
+    coalesce(oi.total_products,0) as total_order_products,
+    coalesce(oi.total_distinct_products,0) as total_order_distinct_items
+    sum()
+from {{ ref('stg_localbikes__orders') }} as o
+left join order_items_grouped_by_orders as oi on o.order_id = oi.order_id
+left join orders_grouped_by_months as om on o.order_id = om.order_id
+left join {{ ref('stg_local_bikes__customers' )}} as c on c.customer_id = o.customer_id

@@ -97,7 +97,7 @@ zip_code        95060
 > suggérer promotions (> discount) lorsque stock stagne
 > suggérer diminution discount ou hausse de prix lorsque stock disparait, seuil stock atteint (quantity of product_id, in stocks table)
 > suggérer réassort, transfert de stock d'un store_id à un autre lorsque les ventes sont plus fréquentes, dans une city, un state qu'un autre
-
+> essayer d'identifier une éventuelle tendance de performance de vente liée à la taille de la ville
 <B 2. Modélisation des données :
 ○ Importer les données brutes dans BigQuery. B>
 24Nov done

@@ -18,10 +18,10 @@ Try running the following commands:
 inspired by databird - analytics engineering bootcamp
 
 Review dataset
-categories:
+<U categories: U>
 category_id     1
 category_name   Children Bicycles
-brands:
+<U brands: U>
 brand id        1	
 brand_name      Electra
 <U customers: U>
@@ -31,15 +31,6 @@ last_name       House
 phone           (559) 114-2580
 email           luz.house@gmail.com
 street          491 Railroad Street
-city            Fresno
-state           CA
-zip_code        93706
-<U customer_items: U>
-first_name      Luz
-last_name       House
-phone           (559) 114-2580           
-email           luz.house@gmail.com
-street          491 Railroad Street 
 city            Fresno
 state           CA
 zip_code        93706
@@ -92,6 +83,13 @@ zip_code        95060
 <B 1. Définir les axes d’analyse :
 ○ Identifier des axes d'analyse permettant d'aider l'équipe des opérations.
 ○ Le but final est de leur permettre d’optimiser au mieux les ventes et de maximiser le revenu de l'entreprise grâce aux insights obtenus. B>
+mesures à effectuer:
+> performance ventes: total des ventes par unité de temps, nombre de ventes par unité de temps. Seront ensuite disponible à l'échelle du store, du staff, du manager, globalement
+> stocks disponibles: 
+> analyse produits: total ventes par produit par unité temporelle, par store
+> analyse marketing: total et fréquence achats par client, lifetime value
+
+dans un deuxième temps, en terme de recommendation, on pourrait:
 > identifier les produits dont les ventes sont moins fréquentes (product_id et quantity_id faible  sur order_item, order_id sur) et qui bénéficierait d'une mise en promotion,
 > identifier l'effet de discoount sur amélioration des ventes
 > suggérer promotions (> discount) lorsque stock stagne

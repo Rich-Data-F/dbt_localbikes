@@ -1,6 +1,6 @@
 /* {{ config(materialized="view") }}*/
 
-with source_data as (select * FROM {{ source("localbikes",     "products") }})
+with source_data as (select * FROM {{ source("localbikes","products") }})
 /*(`fivetrandestination.localbikes.products`)*/ 
 SELECT
     product_id,
@@ -9,7 +9,7 @@ SELECT
     category_id,	
     model_year,	
     list_price,
-    count(*) as line_count
+    count(*) as line_count,
 from source_data
 group by
     product_id,

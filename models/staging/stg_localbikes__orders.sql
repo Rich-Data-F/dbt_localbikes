@@ -3,13 +3,14 @@ with source_data_orders as (select * from {{ source("localbikes", "orders") }})
 
 select
     order_id,
-    customer_id,
+    customer_id, -- foreign key
     order_status,
     order_date,
     required_date,
-    ifnull(shipped_date, 'pending') as shipped_date_status,  /* required correction */
-    store_id,
-    staff_id,
+    case when shipped_date = 'NULL' THEN null else shipped_date end as shopped_date,
+--    ifnull(shipped_date, 'pending') as shipped_date_status,  /* requires correction
+    store_id, -- foreign key
+    staff_id, -- foreign key
     count(*) as line_count
 from source_data_orders
 group by

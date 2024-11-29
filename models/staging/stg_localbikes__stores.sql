@@ -9,7 +9,7 @@ SELECT
   phone,
   email,
   street,	
-  city,	
+  city,
   state,
 /*  count(*) as line_count,*/
 from source_data
@@ -19,7 +19,7 @@ group by
   phone,
   email,
   street,	
-  city,	
+  city,
   state
 order by
   store_id

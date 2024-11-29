@@ -1,0 +1,7 @@
+
+orders_grouped_by_months as (
+select concat(Month(date (order_date)),'_',year(date(order_date)) as order_month_year,
+    count(distinct order_id) as orders_per_month
+from {{ ref('stg_localbikes__orders') }}
+group by order_month_year
+)

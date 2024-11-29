@@ -1,0 +1,118 @@
+version: 2
+
+sources:
+  - name: localbikes
+    schema: localbikes_us
+    tables:
+      - name: brands
+        description: 'table that contains brand id and name'
+        columns:
+          - name: brand_id
+            description: "The primary key for this table"
+            tests:
+              - unique
+              - not_null
+      - name: categories
+        description: 'table that contains categories name and id of the categories, ie children bicycles'
+        columns:
+          - name: category_id
+            description: "The primary key for this table"
+            tests:
+              - unique
+              - not_null        
+      - name: customers
+        description: 'A table that contains customers id and details, mostly address'
+        columns:
+          - name: customer_id
+            description: "The primary key for this table"
+            tests:
+              - unique
+              - not_null        
+      - name: order_items
+        description: 'A table that contains details of every order (sub)items, including quantity, unit price of the product(s), and discount. 
+        A column order_item_id was created by concatenation of order and item_id. order_item_paid_price was added for the 2 decimals price of the subitem line post discount.'
+        columns:
+          - name: order_item_id
+            description: "The primary key for this table"
+            tests:
+              - unique
+              - not_null        
+      - name: orders
+        description: A table that describes the order status and links it to customer, store, and staff
+        columns:
+          - name: order_id
+            description: "The primary key for this table"
+            tests:
+              - unique
+              - not_null
+          - name: customer_id
+            description: foreign_key
+            tests:
+              - relationships:
+                  to: ref('stg_localbikes_customers')
+                  field: customer_id
+          - name: store_id
+            description: foreign_key
+            tests:
+              - relationships:
+                  to: ref('stg_localbikes__stores')
+                  field: store_id
+          - name: staff_id
+            description: foreign_key
+            tests:
+              - relationships:
+                  to: ref('stg_localbikes__staffs')
+                  field: staff_id
+      - name: products
+        description: 'A table that describes the products id and name, year, list_price, and links it to brand, and category '
+        columns:
+          - name: product_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: brand_id
+            description: foreign key
+            tests:
+              - relationships:
+                  to: ref('stg_localbikes__brands')
+                  field: brand_id
+          - name: category_id
+            description: foreign key
+            tests:
+              - relationships:
+                  to: ref('stg_localbikes__categories')
+                  field: category_id
+      - name: staffs
+        description: 'A table that describes the staff id name, and details and links it to the manager_id, and the store_id
+        and name, year, list_price, and links it to brand, and category '
+        columns: 
+          - name: staff_id
+            description: "The primary key for this table"
+            tests:
+              - unique
+              - not_null     
+      - name: stocks
+        description: "A table that describes for a given store id and product id, the quantity. A unique 'store_product_id' was created using the
+        concatenation of store and product id"
+        columns:
+          - name: 'store_product_id'
+            description: 'The primary key for this table'
+            tests:
+              - unique
+              - not_null
+          - name: product_id
+            description: foreign key
+            tests:
+              - relationships:
+                  to: ref('stg_localbikes__brands')
+                  field: product_id
+      - name: stores
+        description: "A table that describes for a given store id and product id, the quantity. A unique 'store_product_id' was created using the
+        concatenation of store and product id"
+        columns:
+          - name: 'store_id'
+            description: "The primary key for this table"
+            tests:
+              - unique
+              - not_null

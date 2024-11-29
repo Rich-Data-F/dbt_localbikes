@@ -1,0 +1,12 @@
+version: 2
+
+
+models:
+  - name: int_localbikes__orders_w_items_customers
+    description: 'interim table to join orders with subitems and customers'
+    columns:
+    - name: order_id
+      description: "Primary key, unique identifier for each order."
+      tests:
+        - unique
+        - not_null

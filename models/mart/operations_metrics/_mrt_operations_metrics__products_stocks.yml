@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: mrt_operations_metrics__products_stocks
+    description: 'datamart table collating available stock of each article at each store, 
+    providing mainly its price list, category, brand of the product. 
+    6 road bikes product_names appear with no quantity and store assigned'
+    columns:
+    - name: city
+      description: 'foreign_key'
+      tests:
+        - relationships:
+            to: ref('mrt_operations_metrics__stores')
+    - name: state
+      description: 'foreign_key' 
+      tests:
+        - relationships:
+            to: ref('mrt_operations_metrics__stores')
+    - name: model_year
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: "<=2025"

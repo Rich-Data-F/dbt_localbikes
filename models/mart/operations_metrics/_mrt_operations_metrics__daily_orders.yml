@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: mrt_operations_metrics__daily_orders
+    description: 'datamart table collating information at date and state level for the whole stores network, 
+    providing the number of orders, total and average number of articles and amount.'
+    columns:
+    - name: state
+      description: 'foreign_key' 
+      tests:
+        - relationships:
+            to: ref('mrt_operations_metrics__stores')
+    - name: total_orders_amount
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: ">=0"
+    - name: average_order_articles
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: ">=0"
+    - name: average_article_value
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: ">=0"
+

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: mrt_operations_metrics__stores
+    description: 'datamart table collating for each store one line per date with 
+    number of orders, total and average number of articles and amount' 
+    columns:
+    - name: city
+      description: 'foreign_key'
+      tests:
+        - relationships:
+            to: ref('mrt_operations_metrics__stores')
+    - name: state
+      description: 'foreign_key' 
+      tests:
+        - relationships:
+            to: ref('mrt_operations_metrics__stores')
+    - name: model_year
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: "<=2025"

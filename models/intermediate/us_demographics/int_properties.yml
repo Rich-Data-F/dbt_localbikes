@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: us_cities_population_datasoft
+    description: "Source for US cities population data"
+    tables:
+      - name: us_cities_population_formatted
+        description: "Formatted population data for US cities"
+
+models:
+  - name: int_us_cities_population
+    description: 'us cities population with sex ratio and some ethnic categories'
+    columns:
+    - name: city_state_code
+      description: "Primary key, unique identifier for each city"
+      tests:
+        - unique
+        - not_null
+    - name: city
+      description: foreign_key
+      tests:
+        - relationships:
+            to: ref('int_localbikes_stock_w_stores.sql')
+            field: city

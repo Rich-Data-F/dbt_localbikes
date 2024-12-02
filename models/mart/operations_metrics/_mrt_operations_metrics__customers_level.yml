@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: mrt_operations_metrics__customers_level
+    description: 'datamart table collating information at customer level'
+    columns:
+    - name: customer_full_name
+      description: "Primary key, unique identifier for each order."
+      tests:
+        - unique
+        - not_null
+    - name: city
+      description: 'foreign_key'
+      tests:
+        - relationships:
+            to: ref('mrt_operations_metrics__stores')
+    - name: state
+      description: 'foreign_key' 
+      tests:
+        - relationships:
+            to: ref('mrt_operations_metrics__stores')
+    - name: average_discount
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: "<100%"
+    - name: total_ordered_article
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: ">=0"
+
